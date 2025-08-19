@@ -8,6 +8,7 @@ from langgraph.graph import StateGraph
 from langgraph.graph import START, END
 from langchain_core.runnables import RunnableConfig
 from google.genai import Client
+from google.genai.types import HttpOptions
 
 from agent.state import (
     OverallState,
@@ -37,7 +38,9 @@ if os.getenv("GEMINI_API_KEY") is None:
     raise ValueError("GEMINI_API_KEY is not set")
 
 # Used for Google Search API
-genai_client = Client(api_key=os.getenv("GEMINI_API_KEY"))
+gemini_base_url = os.getenv("GEMINI_BASE_URL")
+http_options = HttpOptions(base_url=gemini_base_url) if gemini_base_url else None
+genai_client = Client(api_key=os.getenv("GEMINI_API_KEY"), http_options=http_options)
 
 
 # Nodes
