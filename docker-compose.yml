@@ -38,10 +38,9 @@ services:
       langgraph-postgres:
         condition: service_healthy
     environment:
-      GEMINI_API_KEY: ${GEMINI_API_KEY}
-      GEMINI_BASE_URL: ${GEMINI_BASE_URL}
-      LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
+      # 警告：请直接在此处填入您的密钥，但这有安全风险。
+      GEMINI_API_KEY: '在此处填入您的GEMINI_API_KEY'
+      # GEMINI_BASE_URL: '' # 如果需要，取消注释并填入
+      LANGSMITH_API_KEY: '' # 如果需要，填入您的LANGSMITH_API_KEY
       REDIS_URI: redis://langgraph-redis:6379
       POSTGRES_URI: postgres://postgres:postgres@langgraph-postgres:5432/postgres?sslmode=disable
-    env_file:
-      - backend/.env
